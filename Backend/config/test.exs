@@ -17,7 +17,7 @@ config :backend, Backend.Repo,
 # you can enable the server option below.
 config :backend, BackendWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "rPBy8v4Nx67ATRQGmYBzJUk+SOu+1zuq55hg/zcPhnKdUizMF6SE6jOA51ID7fXd",
+  secret_key_base: "UHE3UoaiTB6WBIABEFfOviwGehDUPtcJ/YKJb0B3v9kwSjvkCTCpwyeL/pojbWI6",
   server: false
 
 # In test we don't send emails
@@ -31,7 +31,3 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
-
-# Enable helpful, but potentially expensive runtime checks
-config :phoenix_live_view,
-  enable_expensive_runtime_checks: true

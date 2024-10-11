@@ -16,11 +16,11 @@ config :backend, BackendWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: BackendWeb.ErrorHTML, json: BackendWeb.ErrorJSON],
+    formats: [json: BackendWeb.ErrorJSON],
     layout: false
   ],
   pubsub_server: Backend.PubSub,
-  live_view: [signing_salt: "cfl0fPm3"]
+  live_view: [signing_salt: "AspqXhE2"]
 
 # Configures the mailer
 #
