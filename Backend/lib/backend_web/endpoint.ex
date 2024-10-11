@@ -7,7 +7,7 @@ defmodule BackendWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_backend_key",
-    signing_salt: "V2ZMhq+b",
+    signing_salt: "plL/lZ4w",
     same_site: "Lax"
   ]
 
@@ -38,6 +38,9 @@ defmodule BackendWeb.Endpoint do
 
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
+
+  plug CORSPlug,
+    origin: ["http://localhost:5173", "http://127.0.0.1:5173"]  # Adjust the port if necessary
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
