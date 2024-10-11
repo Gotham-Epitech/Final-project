@@ -40,6 +40,8 @@ COPY --from=builder /app/_build/prod/rel/backend ./
 
 # Exposer le port de l'application
 EXPOSE 4000
+EXPOSE 5173
+EXPOSE 5432
 
 # Démarrer l'application
 CMD ["./bin/backend", "start"]
