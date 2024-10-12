@@ -5,6 +5,7 @@ import User from './components/User.vue';
 
 <template>
   <div id="app">
+    <p class="text-red-500">test</p>
     <!-- Include the User component -->
     <User />
     <!-- RouterView to render other components based on routes -->
