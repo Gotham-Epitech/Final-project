@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   backend:
-    build: ./backend
+    build: ./Backend
     env_file:
       - ./Backend/.env
     ports:
@@ -13,15 +13,15 @@ services:
       - db
 
   frontend:
-    build: ./frontend
+    build: ./Frontend
     ports:
-      - "8080:80"
+      - "5173:80"
 
   db:
     image: postgres:13-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: my_app_prod
+      POSTGRES_DB: backend_dev
     ports:
       - "5432:5432"
