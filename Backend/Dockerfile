@@ -1,7 +1,10 @@
 # Étape de construction
 FROM elixir:1.17.3-alpine AS builder
 
-# Installer les dépendances de build
+# Set build environment variables
+ENV MIX_ENV=prod
+
+# Install build dependencies
 RUN apk add --no-cache build-base git
 
 # Définir le répertoire de travail
@@ -12,25 +15,37 @@ RUN mix local.hex --force && mix local.rebar --force
 
 # Copier les fichiers de configuration et les dépendances
 COPY mix.exs mix.lock ./
-COPY config config
 
 # Installer les dépendances
-RUN mix deps.get --only prod
+RUN mix deps.get
 
 # Copier le reste du code
 COPY . .
 
 # Compiler le code
-RUN MIX_ENV=prod mix compile
+RUN mix compile
 
-# Construire le release
-RUN MIX_ENV=prod mix release
+# (Optional) Compile assets if your app has them
+# RUN npm install --prefix ./assets
+# RUN npm run deploy --prefix ./assets
+# RUN mix phx.digest
+
+# Build the release
+RUN mix release
 
 # Étape d'exécution
 FROM alpine:latest
 
 # Installer les dépendances runtime
 RUN apk add --no-cache libstdc++ openssl ncurses-libs
+
+# **Add postgresql-client to install pg_isready**
+RUN apk add --no-cache postgresql-client
+
+# Set environment variables
+ENV MIX_ENV=prod
+ENV REPLACE_OS_VARS=true
+ENV APP_NAME=backend
 
 # Définir le répertoire de travail
 WORKDIR /app
@@ -40,8 +55,12 @@ COPY --from=builder /app/_build/prod/rel/backend ./
 
 # Exposer le port de l'application
 EXPOSE 4000
-EXPOSE 5173
-EXPOSE 5432
 
-# Démarrer l'application
-CMD ["./bin/backend", "start"]
+# Copy the entrypoint script
+COPY entrypoint.sh .
+
+# Make the entrypoint script executable
+RUN chmod +x entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["./entrypoint.sh"]

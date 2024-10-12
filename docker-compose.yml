@@ -1,22 +1,6 @@
-version: "3.8"
+# version: "3.8"
 
 services:
-  backend:
-    build: ./Backend
-    env_file:
-      - ./Backend/.env
-    ports:
-      - "4000:4000"
-    environment:
-      DATABASE_URL: "postgresql://postgres:postgres@db:5432/my_app_prod"
-    depends_on:
-      - db
-
-  frontend:
-    build: ./Frontend
-    ports:
-      - "5173:80"
-
   db:
     image: postgres:13-alpine
     environment:
@@ -25,3 +9,21 @@ services:
       POSTGRES_DB: backend_dev
     ports:
       - "5432:5432"
+
+  backend:
+    build: ./Backend
+    env_file:
+      - ./Backend/.env
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/backend_dev"
+    #volumes:
+    #  - ./Backend:/app
+
+  frontend:
+    build: ./Frontend
+    ports:
+      - "5173:80"
