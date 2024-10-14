@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue';
 import axios from 'axios';
 import Notification from './Notification.vue';
+import { useRouter } from 'vue-router';
 
 const searchUsername = ref('');
 const searchEmail = ref('');
@@ -216,6 +217,13 @@ const handleError = (error, defaultMessage) => {
             class="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 w-full"
           >
             Back to Search
+          </button>
+          <!-- Navigate to Working Times -->
+          <button
+            @click="() => router.push(`/users/${userData.id}/workingtimes`)"
+            class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
+          >
+            Manage Working Times
           </button>
         </div>
       </div>

@@ -1,13 +1,39 @@
 // src/router/index.js
 
 import { createRouter, createWebHistory } from 'vue-router';
+import User from '../components/User.vue';
+import WorkingTimes from '../components/WorkingTimes.vue';
+import WorkingTime from '../components/WorkingTime.vue';
+import ClockManager from '../components/ClockManager.vue';
 import ChartManager from '../components/ChartManager.vue';
 import BarChart from '../components/BarChart.vue';
 import LineChart from '../components/LineChart.vue';
 import PieChart from '../components/PieChart.vue';
 
 const routes = [
-  // Other routes...
+  {
+    path: '/',
+    name: 'Home',
+    component: User,  // Main User Management Component
+  },
+  {
+    path: '/users/:userId/workingtimes',
+    name: 'WorkingTimes',
+    component: WorkingTimes,
+    props: true,
+  },
+  {
+    path: '/users/:userId/workingtimes/:workingTimeId',
+    name: 'WorkingTime',
+    component: WorkingTime,
+    props: true,
+  },
+  {
+    path: '/users/:userId/clocks',
+    name: 'ClockManager',
+    component: ClockManager,
+    props: true,
+  },
   {
     path: '/chartManager/:userid',
     name: 'ChartManager',
