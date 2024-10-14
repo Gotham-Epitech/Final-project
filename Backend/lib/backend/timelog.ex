@@ -1,11 +1,8 @@
-defmodule Backend.Workingtime do
+defmodule Backend.Timelog do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:id, :date, :arrival_time, :departure_time, :user_id]}
-
-  schema "workingtimes" do
-    # Fields
+  schema "timelogs" do
     field :date, :date
     field :arrival_time, :time
     field :departure_time, :time
@@ -18,8 +15,8 @@ defmodule Backend.Workingtime do
   end
 
   @doc false
-  def changeset(workingtime, attrs) do
-    workingtime
+  def changeset(timelog, attrs) do
+    timelog
     |> cast(attrs, [:date, :arrival_time, :departure_time, :user_id])
     |> validate_required([:date, :arrival_time, :departure_time, :user_id])
     |> validate_time_order(:arrival_time, :departure_time)

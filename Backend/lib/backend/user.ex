@@ -3,26 +3,74 @@ defmodule Backend.User do
   import Ecto.Changeset
   alias Backend.Repo
 
-  @derive {Jason.Encoder, only: [:id, :username, :email]}
+  @derive {Jason.Encoder, only: [:id, :username, :email, :firstname, :lastname, :contact_number]}
 
   schema "users" do
+    # Existing Fields
     field :username, :string
     field :email, :string
 
+    # New Fields
+    field :firstname, :string
+    field :lastname, :string
+    field :password_hash, :string
+    field :contact_number, :string
+
+    # Virtual Field for Password
+    field :password, :string, virtual: true
+
+    # Associations
     has_many :clock, Backend.Clock
     has_many :workingtime, Backend.Workingtime
 
+    # New Associations
+    belongs_to :role, Backend.Role
+    belongs_to :team, Backend.Team
+
+    # Additional Associations
+    has_many :roles_permissions, Backend.RolesPermission, foreign_key: :role_id
+    has_many :timeoff_requests, Backend.TimeoffRequest, foreign_key: :user_id
+    has_many :approved_timeoff_requests, Backend.TimeoffRequest, foreign_key: :approved_by_id
+    has_many :audit_logs, Backend.Auditlog, foreign_key: :user_id
+    has_many :notifications, Backend.Notification, foreign_key: :user_id
+    has_many :time_logs, Backend.Timelog, foreign_key: :user_id
+    has_many :managed_teams, Backend.Team, foreign_key: :manager_id
+
+    # Timestamps
     timestamps()
   end
 
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :email])
-    |> validate_required([:username, :email])
+    |> cast(attrs, [
+      :username,
+      :email,
+      :firstname,
+      :lastname,
+      :password,
+      :contact_number,
+      :role_id,
+      :team_id
+    ])
+    |> validate_required([
+      :username,
+      :email,
+      :firstname,
+      :lastname,
+      :contact_number,
+      :role_id,
+      :team_id
+    ])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+\.[^\s]+$/, message: "must be a valid email format")
     |> validate_length(:username, min: 1, message: "username can't be empty")
+    |> validate_length(:firstname, min: 1, max: 50)
+    |> validate_length(:lastname, min: 1, max: 50)
+    |> validate_format(:contact_number, ~r/^\+?[1-9]\d{1,14}$/, message: "must be a valid contact number")
     |> unique_username_and_email(user)
+    |> put_password_hash()
+    |> assoc_constraint(:role)
+    |> assoc_constraint(:team)
   end
 
   defp unique_username_and_email(changeset, user) do
@@ -54,6 +102,15 @@ defmodule Backend.User do
       end
     else
       changeset
+    end
+  end
+
+  defp put_password_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        change(changeset, password_hash: Bcrypt.hash_pwd_salt(password))
+      _ ->
+        changeset
     end
   end
 end
