@@ -3,7 +3,9 @@ defmodule Backend.User do
   import Ecto.Changeset
   alias Backend.Repo
 
+
   @derive {Jason.Encoder, only: [:id, :username, :email, :firstname, :lastname, :contact_number, :role_id, :team_id, :manager_id]}
+
 
   schema "users" do
     # Existing Fields
@@ -15,6 +17,7 @@ defmodule Backend.User do
     field :lastname, :string
     field :password_hash, :string
     field :contact_number, :string
+
 
     # Virtual Field for Password
     field :password, :string, virtual: true
@@ -36,6 +39,7 @@ defmodule Backend.User do
     has_many :time_logs, Backend.Timelog, foreign_key: :user_id
     has_many :managed_teams, Backend.Team, foreign_key: :manager_id
 
+
     # Timestamps
     timestamps()
   end
@@ -48,17 +52,19 @@ defmodule Backend.User do
       :email,
       :firstname,
       :lastname,
-      :password,
+      :password_hash,
       :contact_number,
       :role_id,
       :team_id,
       :manager_id
     ])
+    |> put_default_role_and_team()
     |> validate_required([
       :username,
       :email,
       :firstname,
       :lastname,
+      :password_hash,
       :contact_number,
       :role_id
     ])
@@ -66,12 +72,15 @@ defmodule Backend.User do
     |> validate_length(:username, min: 1, message: "username can't be empty")
     |> validate_length(:firstname, min: 1, max: 50)
     |> validate_length(:lastname, min: 1, max: 50)
-    |> validate_format(:contact_number, ~r/^\+?[1-9]\d{1,14}$/, message: "must be a valid contact number")
+    |> validate_format(:contact_number, ~r/^(\+33|0)[1-9](\d{8})$/, message: "must be a valid French contact number")
+
     |> unique_username_and_email(user)
     |> put_password_hash()
     |> assoc_constraint(:role)
     |> assoc_constraint(:team)
+
     |> assoc_constraint(:manager)
+
   end
 
   defp unique_username_and_email(changeset, user) do
@@ -114,4 +123,11 @@ defmodule Backend.User do
         changeset
     end
   end
+
+  defp put_default_role_and_team(changeset) do
+    changeset
+    |> put_change(:role_id, 1)   # ID par défaut pour le rôle
+    |> put_change(:team_id, 1)   # ID par défaut pour l'équipe
+  end
+
 end
