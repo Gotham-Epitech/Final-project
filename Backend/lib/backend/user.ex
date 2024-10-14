@@ -4,7 +4,7 @@ defmodule Backend.User do
   alias Backend.Repo
 
 
-  @derive {Jason.Encoder, only: [:id, :username, :email, :firstname, :lastname, :contact_number, :role_id, :team_id, :manager_id]}
+  @derive {Jason.Encoder, only: [:id, :username, :email, :firstname, :lastname, :password_hash, :contact_number, :role_id, :team_id, :manager_id]}
 
 
   schema "users" do
