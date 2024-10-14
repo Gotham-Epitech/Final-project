@@ -3,7 +3,7 @@ defmodule Backend.User do
   import Ecto.Changeset
   alias Backend.Repo
 
-  @derive {Jason.Encoder, only: [:id, :username, :email, :firstname, :lastname, :contact_number]}
+  @derive {Jason.Encoder, only: [:id, :username, :email, :firstname, :lastname, :contact_number, :role_id, :team_id, :manager_id]}
 
   schema "users" do
     # Existing Fields
@@ -26,9 +26,9 @@ defmodule Backend.User do
     # New Associations
     belongs_to :role, Backend.Role
     belongs_to :team, Backend.Team
+    belongs_to :manager, Backend.User, foreign_key: :manager_id
 
     # Additional Associations
-    has_many :roles_permissions, Backend.RolesPermission, foreign_key: :role_id
     has_many :timeoff_requests, Backend.TimeoffRequest, foreign_key: :user_id
     has_many :approved_timeoff_requests, Backend.TimeoffRequest, foreign_key: :approved_by_id
     has_many :audit_logs, Backend.Auditlog, foreign_key: :user_id
@@ -51,7 +51,8 @@ defmodule Backend.User do
       :password,
       :contact_number,
       :role_id,
-      :team_id
+      :team_id,
+      :manager_id
     ])
     |> validate_required([
       :username,
@@ -59,8 +60,7 @@ defmodule Backend.User do
       :firstname,
       :lastname,
       :contact_number,
-      :role_id,
-      :team_id
+      :role_id
     ])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+\.[^\s]+$/, message: "must be a valid email format")
     |> validate_length(:username, min: 1, message: "username can't be empty")
@@ -71,6 +71,7 @@ defmodule Backend.User do
     |> put_password_hash()
     |> assoc_constraint(:role)
     |> assoc_constraint(:team)
+    |> assoc_constraint(:manager)
   end
 
   defp unique_username_and_email(changeset, user) do
