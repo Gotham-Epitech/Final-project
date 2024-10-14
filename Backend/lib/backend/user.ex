@@ -52,13 +52,13 @@ defmodule Backend.User do
       :email,
       :firstname,
       :lastname,
-      :password_hash,
+      :password,
       :contact_number,
       :role_id,
       :team_id,
       :manager_id
     ])
-    |> put_default_role_and_team()
+    |> put_password_hash()
     |> validate_required([
       :username,
       :email,
@@ -75,7 +75,6 @@ defmodule Backend.User do
     |> validate_format(:contact_number, ~r/^(\+33|0)[1-9](\d{8})$/, message: "must be a valid French contact number")
 
     |> unique_username_and_email(user)
-    |> put_password_hash()
     |> assoc_constraint(:role)
     |> assoc_constraint(:team)
 
@@ -123,11 +122,4 @@ defmodule Backend.User do
         changeset
     end
   end
-
-  defp put_default_role_and_team(changeset) do
-    changeset
-    |> put_change(:role_id, 1)   # ID par défaut pour le rôle
-    |> put_change(:team_id, 1)   # ID par défaut pour l'équipe
-  end
-
 end

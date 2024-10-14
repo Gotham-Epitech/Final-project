@@ -61,7 +61,8 @@ users = [
     firstname: "visitor",
     lastname: "visitor",
     contact_number: "0607080910",
-    role_name: "visitor"
+    role_name: "visitor",
+    password_hash: "123"
   },
   %{
     username: "janitor",
@@ -70,7 +71,8 @@ users = [
     firstname: "janitor",
     lastname: "janitor",
     contact_number: "0607080910",
-    role_name: "janitor"
+    role_name: "janitor",
+    password_hash: "123"
   },
   %{
     username: "hr",
@@ -79,7 +81,8 @@ users = [
     firstname: "hr",
     lastname: "hr",
     contact_number: "0607080910",
-    role_name: "hr"
+    role_name: "hr",
+    password_hash: "123"
   },
   %{
     username: "ceo",
@@ -88,7 +91,8 @@ users = [
     firstname: "ceo",
     lastname: "ceo",
     contact_number: "0607080910",
-    role_name: "ceo"
+    role_name: "ceo",
+    password_hash: "123"
   },
   %{
     username: "admin",
@@ -97,7 +101,8 @@ users = [
     firstname: "admin",
     lastname: "admin",
     contact_number: "0607080910",
-    role_name: "admin"
+    role_name: "admin",
+    password_hash: "123"
   }
 ]
 
