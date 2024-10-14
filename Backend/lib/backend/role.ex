@@ -7,7 +7,7 @@ defmodule Backend.Role do
     field :description, :string
 
     # Associations
-    has_many :roles_permissions, Backend.RolesPermission, foreign_key: :role_id
+    belongs_to :permission, Backend.Permission, foreign_key: :permission_id
     has_many :users, Backend.User
 
     # Timestamps
@@ -17,8 +17,8 @@ defmodule Backend.Role do
   @doc false
   def changeset(role, attrs) do
     role
-    |> cast(attrs, [:name, :description])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :description, :permission_id])
+    |> validate_required([:name, :permission_id])
     |> validate_length(:name, min: 1, max: 100)
     |> unique_constraint(:name)
   end

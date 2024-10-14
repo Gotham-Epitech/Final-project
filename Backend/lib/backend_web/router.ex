@@ -25,6 +25,16 @@ defmodule BackendWeb.Router do
     # Clock CRUD Routes
     get "/clocks/:user_id", ClockController, :index  # Get all clocks for a user
     post "/clocks/:user_id", ClockController, :create  # Create a clock for a user
+
+    # Timelog CRUD Routes
+    get "/timelogs/:user_id", TimelogController, :index  # Get all timelogs for a user
+    get "/timelogs/:user_id/:id", TimelogController, :show  # Get a specific timelog for a user
+    post "/timelogs/:user_id", TimelogController, :create  # Create a timelog for a user
+
+
+
+
+
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
