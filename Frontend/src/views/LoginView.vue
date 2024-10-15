@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <p>user</p>
+  <p>Login</p>
 
 </template>
 

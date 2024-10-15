@@ -1,6 +1,8 @@
 // src/router/index.js
 
 import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import LoginView from '../views/LoginView.vue';
 import User from '../components/User.vue';
 import WorkingTimes from '../components/WorkingTimes.vue';
 import WorkingTime from '../components/WorkingTime.vue';
@@ -13,8 +15,13 @@ import PieChart from '../components/PieChart.vue';
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: User,  // Main User Management Component
+    name: 'HomeView',
+    component: HomeView,
+  },
+  {
+    path: '/users',
+    name: 'LoginView',
+    component: LoginView,
   },
   {
     path: '/users/:userId/workingtimes',
