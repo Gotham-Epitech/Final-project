@@ -3,7 +3,8 @@
 </script>
 
 <template>
-  <p>user</p>
+  <p>Home</p>
+
 
 </template>
 
