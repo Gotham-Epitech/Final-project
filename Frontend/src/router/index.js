@@ -3,7 +3,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // Views
-import Login from '../views/Login.vue';
+// import Login from './Login.vue';
+import AuthView from '../views/AuthView.vue';
 import Landing from '../views/Landing.vue';
 import Dashboard from '../views/Dashboard.vue';
 import Profile from '../views/Profile.vue';
@@ -21,9 +22,9 @@ const routes = [
     component: Landing,
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login,
+    path: '/Auth',
+    name: 'AuthView',
+    component: AuthView,
   },
   {
     path: '/dashboard',
@@ -34,7 +35,12 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
-  }
+  },
+  // {
+  //   path: '/signup',
+  //   name: 'Signup',
+  //   component: Signup,
+  // },
 ];
 
 const router = createRouter({

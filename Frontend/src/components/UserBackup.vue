@@ -64,7 +64,7 @@ const updateUser = async () => {
   }
 };
 
-const getUser = async () => {
+const getUserBackup = async () => {
   loading.value = true;
   try {
     const response = await axios.get('http://127.0.0.1:4000/api/users', {
