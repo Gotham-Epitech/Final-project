@@ -28,34 +28,59 @@ export default {
   name: "LineChart",
   mounted() {
     this.$nextTick(() => {
+      // Helper function to convert "HH:MM" to total minutes
+      const timeToMinutes = (time) => {
+        const [hours, minutes] = time.split(':').map(Number);
+        return hours * 60 + minutes;
+      };
+      // Helper function to convert total minutes to "HH:MM"
+      const minutesToTime = (minutes) => {
+        const hrs = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        return `${hrs}:${mins.toString().padStart(2, '0')}`;
+      };
       // Define the chart configuration
       const config = {
         type: "line",
         data: {
           labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July"
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
           ],
           datasets: [
             {
-              label: new Date().getFullYear(),
+              label: "Scheduled hours",
               backgroundColor: "#4c51bf",
               borderColor: "#4c51bf",
-              data: [65, 78, 66, 44, 56, 67, 75],
+              data: [
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),],
               fill: false,
               tension: 0.1 // Adds slight curve to the line
             },
             {
-              label: new Date().getFullYear() - 1,
+              label: "Clocked hours",
               fill: false,
               backgroundColor: "#ed64a6",
               borderColor: "#ed64a6",
-              data: [40, 68, 86, 74, 56, 60, 87],
+              data: [
+                timeToMinutes("6:57"),
+                timeToMinutes("6:35"),
+                timeToMinutes("7:02"),
+                timeToMinutes("7:30"),
+                timeToMinutes("6:15"),
+                timeToMinutes("6:45"),
+                timeToMinutes("7:03")],
               tension: 0.1
             }
           ]
@@ -66,12 +91,12 @@ export default {
           plugins: {
             title: {
               display: false,
-              text: "Sales Charts",
+              text: "Clocked Hours",
               color: "white",
             },
             legend: {
               labels: {
-                color: "white" // Changed from 'fontColor' to 'color'
+                color: "white"
               },
               align: "end",
               position: "bottom"
@@ -86,17 +111,17 @@ export default {
             }
           },
           scales: {
-            x: { // Updated from 'xAxes' to 'x'
+            x: {
               ticks: {
-                color: "rgba(255,255,255,0.7)" // Changed from 'fontColor' to 'color'
+                color: "rgba(255,255,255,0.7)"
               },
               display: true,
               title: {
                 display: false,
-                text: "Month",
-                color: "white" // Changed from 'fontColor' to 'color'
+                text: "Day",
+                color: "white"
               },
-              grid: { // Changed from 'gridLines' to 'grid'
+              grid: {
                 display: false,
                 borderDash: [2],
                 borderDashOffset: [2],
@@ -106,17 +131,24 @@ export default {
                 zeroLineBorderDashOffset: [2]
               }
             },
-            y: { // Updated from 'yAxes' to 'y'
+            y: {
               ticks: {
-                color: "rgba(255,255,255,0.7)" // Changed from 'fontColor' to 'color'
+                color: "rgba(255,255,255,0.7)",
+                // Callback to format y-axis labels as "HH:MM"
+                callback: (value) => {
+                  return minutesToTime(value);
+                },
+                stepSize: 60, // One-hour increments
+                // Optional: Force stepSize by setting maxTicksLimit if needed
+                // maxTicksLimit: 13 // 0 to 12 inclusive
               },
               display: true,
               title: {
                 display: false,
-                text: "Value",
-                color: "white" // Changed from 'fontColor' to 'color'
+                text: "Time",
+                color: "white"
               },
-              grid: { // Changed from 'gridLines' to 'grid'
+              grid: {
                 borderDash: [3],
                 borderDashOffset: [3],
                 drawBorder: false,
@@ -151,7 +183,7 @@ export default {
               Overview
             </h6>
             <h2 class="text-white text-xl font-semibold">
-              Sales value
+              Clocked Hours
             </h2>
           </div>
         </div>

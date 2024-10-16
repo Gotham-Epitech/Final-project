@@ -162,7 +162,7 @@ export default {
                 <div class="flex flex-wrap items-center">
                   <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                     <h3 class="font-semibold text-base text-blueGray-700">
-                      Page visits
+                      Schedule Accuracy
                     </h3>
                   </div>
                   <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
@@ -182,23 +182,23 @@ export default {
                   <thead>
                     <tr>
                       <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                        Page name
+                        Department
                       </th>
                       <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                        Visitors
+                        Daily hours
                       </th>
                       <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                        Unique users
+                        Employees
                       </th>
                       <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                        Bounce rate
+
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        /argon/
+                        Warehouse
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         4,569
@@ -208,12 +208,12 @@ export default {
                       </td>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                        46,53%
+                        76,53%
                       </td>
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        /argon/index.html
+                        Sales Team
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         3,985
@@ -223,12 +223,12 @@ export default {
                       </td>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-                        46,53%
+                        96,53%
                       </td>
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        /argon/charts.html
+                        Software Team
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         3,513
@@ -238,12 +238,12 @@ export default {
                       </td>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-                        36,49%
+                        56,49%
                       </td>
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        /argon/tables.html
+                        Human Resources
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         2,050
@@ -253,12 +253,12 @@ export default {
                       </td>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                        50,87%
+                        90,87%
                       </td>
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        /argon/profile.html
+                        Contractors
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         1,795
@@ -268,7 +268,7 @@ export default {
                       </td>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <i class="fas fa-arrow-down text-red-500 mr-4"></i>
-                        46,53%
+                        86,53%
                       </td>
                     </tr>
                   </tbody>
@@ -282,7 +282,7 @@ export default {
                 <div class="flex flex-wrap items-center">
                   <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                     <h3 class="font-semibold text-base text-blueGray-700">
-                      Social traffic
+                      Performance indicators
                     </h3>
                   </div>
                   <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
@@ -291,7 +291,7 @@ export default {
                       type="button"
                       style="transition:all .15s ease"
                     >
-                      See all
+                      See detail
                     </button>
                   </div>
                 </div>
@@ -302,10 +302,10 @@ export default {
                   <thead class="thead-light">
                     <tr>
                       <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                        Referral
+                        Type
                       </th>
                       <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                        Visitors
+                        Value
                       </th>
                       <th
                         class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -316,7 +316,7 @@ export default {
                   <tbody>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        Facebook
+                        Punctuality
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         1,480
@@ -337,7 +337,7 @@ export default {
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        Facebook
+                        Compliance
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         5,480
@@ -358,7 +358,7 @@ export default {
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        Google
+                        Overtime
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         4,807
@@ -379,10 +379,10 @@ export default {
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        Instagram
+                        Holidays taken
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        3,678
+                        15
                       </td>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <div class="flex items-center">
@@ -400,10 +400,10 @@ export default {
                     </tr>
                     <tr>
                       <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        twitter
+                        Holidays left
                       </th>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        2,645
+                        13
                       </td>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <div class="flex items-center">

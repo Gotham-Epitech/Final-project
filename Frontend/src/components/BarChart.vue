@@ -1,4 +1,5 @@
 <script>
+
 import {
   Chart,
   BarController,
@@ -24,33 +25,60 @@ export default {
   name: "BarChart",
   mounted() {
     this.$nextTick(() => {
+      // Helper function to convert "HH:MM" to total minutes
+      const timeToMinutes = (time) => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+      };
+      // Helper function to convert total minutes to "HH:MM"
+      const minutesToTime = (minutes) => {
+      const hrs = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `${hrs}:${mins.toString().padStart(2, '0')}`;
+      };
       const config = {
         type: "bar",
         data: {
           labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July"
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
           ],
           datasets: [
             {
-              label: new Date().getFullYear(),
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
-              data: [30, 78, 56, 34, 100, 45, 13],
-              fill: false,
-              barThickness: 8
-            },
-            {
-              label: new Date().getFullYear() - 1,
-              fill: false,
+              label: "Scheduled hours",
               backgroundColor: "#4c51bf",
               borderColor: "#4c51bf",
-              data: [27, 68, 86, 74, 10, 4, 87],
+              data: [
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+                timeToMinutes("7:00"),
+              ],
+              fill: false,
+              barThickness: 8 // Adds slight curve to the line
+            },
+            {
+              label: "Clocked hours",
+              fill: false,
+              backgroundColor: "#ed64a6",
+              borderColor: "#ed64a6",
+              data: [
+                timeToMinutes("6:57"),
+                timeToMinutes("6:35"),
+                timeToMinutes("7:02"),
+                timeToMinutes("7:30"),
+                timeToMinutes("6:15"),
+                timeToMinutes("6:45"),
+                timeToMinutes("7:03")
+              ],
               barThickness: 8
             }
           ]
@@ -84,7 +112,7 @@ export default {
               display: false,
               title: {
                 display: true,
-                text: "Month"
+                text: "Day"
               },
               grid: {
                 borderDash: [2],
@@ -99,7 +127,7 @@ export default {
               display: true,
               title: {
                 display: false,
-                text: "Value"
+                text: "Hours"
               },
               grid: {
                 borderDash: [2],
@@ -110,6 +138,18 @@ export default {
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2]
               },
+              // Configure the y-axis to display time
+              min: 0, // Start at 0 minutes (0:00)
+              max: 720, // End at 1440 minutes (24:00)
+              ticks: {
+                stepSize: 60, // 1-hour increments
+                callback: (value) => {
+                  return minutesToTime(value);
+                },
+                color: "rgba(0,0,0,0.7)" // Darker color for better visibility
+              },
+              // Optionally, you can set the scale type to 'linear' explicitly
+              type: 'linear',
               beginAtZero: true
             }
           }
@@ -129,10 +169,10 @@ export default {
         <div class="flex flex-wrap items-center">
           <div class="relative w-full max-w-full flex-grow flex-1">
             <h6 class="uppercase text-blueGray-400 mb-1 text-xs font-semibold">
-              Performance
+              Timelog
             </h6>
             <h2 class="text-blueGray-700 text-xl font-semibold">
-              Total hours
+              Schedule accuracy
             </h2>
           </div>
         </div>
