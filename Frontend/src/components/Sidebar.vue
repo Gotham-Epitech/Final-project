@@ -39,7 +39,7 @@ export default {
         class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
         href="javascript:void(0)"
       >
-        Tailwind Starter Kit
+        Gotham Time Manager
       </a>
       <!-- User -->
       <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -65,7 +65,7 @@ export default {
                 class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                 href="javascript:void(0)"
               >
-                Tailwind Starter Kit
+                Gotham Time Manager
               </a>
             </div>
             <div class="w-6/12 flex justify-end">
@@ -104,7 +104,7 @@ export default {
               class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
               href="#/landing"
               ><i class="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>
-              Landing Page</a
+              Clock</a
             >
           </li>
           <li class="items-center">
@@ -112,7 +112,7 @@ export default {
               class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
               href="#/profile"
               ><i class="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>
-              Profile Page</a
+              Profile</a
             >
           </li>
           <li class="items-center">
@@ -161,7 +161,7 @@ export default {
               ><i
                 class="fas fa-paint-brush mr-2 text-blueGray-400 text-base"
               ></i>
-              Styles</a
+              blabla</a
             >
           </li>
           <li class="inline-flex">
@@ -169,7 +169,7 @@ export default {
               class="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
               href="#/documentation/alerts"
               ><i class="fab fa-css3-alt mr-2 text-blueGray-400 text-base"></i>
-              CSS Components</a
+              blabla</a
             >
           </li>
           <li class="inline-flex">
@@ -177,7 +177,7 @@ export default {
               class="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
               href="#/documentation/vue/alerts"
               ><i class="fab fa-vuejs mr-2 text-blueGray-400 text-base"></i>
-              VueJS</a
+              blabla</a
             >
           </li>
           <li class="inline-flex">
@@ -185,7 +185,7 @@ export default {
               class="text-blueGray-700 hover:text-blueGray-500  text-sm block mb-4 no-underline font-semibold"
               href="#/documentation/react/alerts"
               ><i class="fab fa-react mr-2 text-blueGray-400 text-base"></i>
-              React</a
+              blabla</a
             >
           </li>
           <li class="inline-flex">
@@ -193,7 +193,7 @@ export default {
               class="text-blueGray-700 hover:text-blueGray-500  text-sm block mb-4 no-underline font-semibold"
               href="#/documentation/angular/alerts"
               ><i class="fab fa-angular mr-2 text-blueGray-400 text-base"></i>
-              Angular</a
+              blabla</a
             >
           </li>
           <li class="inline-flex">
@@ -201,7 +201,7 @@ export default {
               class="text-blueGray-700 hover:text-blueGray-500  text-sm block mb-4 no-underline font-semibold"
               href="#/documentation/javascript/alerts"
               ><i class="fab fa-js-square mr-2 text-blueGray-400 text-base"></i>
-              Javascript</a
+              blabla</a
             >
           </li>
         </ul>
