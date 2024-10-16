@@ -9,7 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@popperjs/core": "^2.11.8",
     "axios": "^1.7.7",
+    "chart.js": "^4.4.4",
     "chartjs": "^0.3.24",
     "daisyui": "^4.12.13",
     "vue": "^3.5.11",

@@ -1,84 +1,174 @@
-<script setup>
-import { ref, onMounted } from 'vue';
-import { Line } from 'vue-chartjs';
-import axios from 'axios';
-import { useRoute } from 'vue-router';
+<script>
+// Import necessary Chart.js components using named imports
 import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
+  Chart,
+  LineController,
   LineElement,
   PointElement,
-  CategoryScale,
   LinearScale,
+  Title,
+  CategoryScale,
+  Tooltip,
+  Legend
 } from 'chart.js';
 
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
+// Register the imported components with Chart.js
+Chart.register(
+  LineController,
   LineElement,
   PointElement,
+  LinearScale,
+  Title,
   CategoryScale,
-  LinearScale
+  Tooltip,
+  Legend
 );
 
-const route = useRoute();
-const userId = route.params.userid;
-
-const chartData = ref(null);
-const chartOptions = ref({
-  responsive: true,
-  maintainAspectRatio: false,
-});
-
-onMounted(async () => {
-  try {
-    // Fetch working times data for the user
-    const response = await axios.get(`http://127.0.0.1:4000/api/workingtime/${userId}`);
-    const workingTimes = response.data;
-
-    // Process data for the line chart
-    const labels = workingTimes.map((wt) => {
-      const date = new Date(wt.start);
-      return date.toLocaleDateString();
-    });
-    const durations = workingTimes.map((wt) => {
-      const start = new Date(wt.start);
-      const end = new Date(wt.end);
-      const duration = (end - start) / (1000 * 60 * 60); // Duration in hours
-      return duration.toFixed(2);
-    });
-
-    chartData.value = {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Working Hours Over Time',
-          data: durations,
-          borderColor: '#3b82f6', // Tailwind blue-500
-          backgroundColor: 'rgba(59, 130, 246, 0.2)',
-          fill: true,
-          tension: 0.4,
+export default {
+  name: "LineChart",
+  mounted() {
+    this.$nextTick(() => {
+      // Define the chart configuration
+      const config = {
+        type: "line",
+        data: {
+          labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July"
+          ],
+          datasets: [
+            {
+              label: new Date().getFullYear(),
+              backgroundColor: "#4c51bf",
+              borderColor: "#4c51bf",
+              data: [65, 78, 66, 44, 56, 67, 75],
+              fill: false,
+              tension: 0.1 // Adds slight curve to the line
+            },
+            {
+              label: new Date().getFullYear() - 1,
+              fill: false,
+              backgroundColor: "#ed64a6",
+              borderColor: "#ed64a6",
+              data: [40, 68, 86, 74, 56, 60, 87],
+              tension: 0.1
+            }
+          ]
         },
-      ],
-    };
-  } catch (error) {
-    console.error('Error fetching working times:', error);
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: {
+            title: {
+              display: false,
+              text: "Sales Charts",
+              color: "white",
+            },
+            legend: {
+              labels: {
+                color: "white" // Changed from 'fontColor' to 'color'
+              },
+              align: "end",
+              position: "bottom"
+            },
+            tooltip: {
+              mode: "index",
+              intersect: false
+            },
+            hover: {
+              mode: "nearest",
+              intersect: true
+            }
+          },
+          scales: {
+            x: { // Updated from 'xAxes' to 'x'
+              ticks: {
+                color: "rgba(255,255,255,0.7)" // Changed from 'fontColor' to 'color'
+              },
+              display: true,
+              title: {
+                display: false,
+                text: "Month",
+                color: "white" // Changed from 'fontColor' to 'color'
+              },
+              grid: { // Changed from 'gridLines' to 'grid'
+                display: false,
+                borderDash: [2],
+                borderDashOffset: [2],
+                color: "rgba(33, 37, 41, 0.3)",
+                zeroLineColor: "rgba(0, 0, 0, 0)",
+                zeroLineBorderDash: [2],
+                zeroLineBorderDashOffset: [2]
+              }
+            },
+            y: { // Updated from 'yAxes' to 'y'
+              ticks: {
+                color: "rgba(255,255,255,0.7)" // Changed from 'fontColor' to 'color'
+              },
+              display: true,
+              title: {
+                display: false,
+                text: "Value",
+                color: "white" // Changed from 'fontColor' to 'color'
+              },
+              grid: { // Changed from 'gridLines' to 'grid'
+                borderDash: [3],
+                borderDashOffset: [3],
+                drawBorder: false,
+                color: "rgba(255, 255, 255, 0.15)",
+                zeroLineColor: "rgba(33, 37, 41, 0)",
+                zeroLineBorderDash: [2],
+                zeroLineBorderDashOffset: [2]
+              },
+              beginAtZero: true // Ensures y-axis starts at zero
+            }
+          }
+        }
+      };
+
+      // Access the <canvas> element via ref and get its 2D context
+      const ctx = this.$refs.lineChart.getContext("2d");
+
+      // Initialize the Chart instance
+      new Chart(ctx, config);
+    });
   }
-});
+};
 </script>
 
 <template>
-  <div class="flex justify-center items-center h-full">
-    <div class="w-full max-w-4xl">
-      <Line v-if="chartData" :chart-data="chartData" :chart-options="chartOptions" />
-      <div v-else class="text-center text-gray-500">Loading chart data...</div>
+  <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-800">
+      <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+        <div class="flex flex-wrap items-center">
+          <div class="relative w-full max-w-full flex-grow flex-1">
+            <h6 class="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
+              Overview
+            </h6>
+            <h2 class="text-white text-xl font-semibold">
+              Sales value
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 flex-auto">
+        <!-- Chart -->
+        <div class="relative" style="height:350px">
+          <canvas ref="lineChart"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* No additional styles needed as Tailwind CSS is used */
+.chart-container {
+  position: relative;
+  height: 350px; /* Ensures the canvas has a defined height */
+}
 </style>
