@@ -16,6 +16,7 @@ defmodule BackendWeb.Router do
     delete "/users/:id", UserController, :delete  # Delete a specific user
 
     # Workingtime CRUD Routes
+    get "/workingtime", WorkingtimeController, :index_all # Get all working times
     get "/workingtime/:user_id", WorkingtimeController, :index  # Get all working times for a user
     get "/workingtime/:user_id/:id", WorkingtimeController, :show  # Get a specific working time
     post "/workingtime/:user_id", WorkingtimeController, :create  # Create a working time for a user

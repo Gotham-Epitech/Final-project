@@ -30,6 +30,18 @@ defmodule BackendWeb.WorkingtimeController do
     end
   end
 
+  def index_all(conn, _params) do
+    workingtimes = Repo.all(Workingtime)
+
+    if workingtimes == [] do
+      conn
+      |> put_status(:not_found)
+      |> json(%{error: "No workingtimes found"})
+    else
+      json(conn, workingtimes)
+    end
+  end
+
   # Fetch a specific working time for a user
   def show(conn, %{"user_id" => user_id, "id" => id}) do
     case Repo.get_by(Workingtime, id: id, user_id: user_id) do
